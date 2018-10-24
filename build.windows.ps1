@@ -19,6 +19,7 @@ try {
     )
     $cmakeArguments = @(
         "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchain"
+        '-DTD_ENABLE_JNI=ON'
         '..'
     )
     $cmakeBuildArguments = @(

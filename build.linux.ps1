@@ -12,6 +12,7 @@ Push-Location $td/build
 try {
     $cmakeArguments = @(
         '-DCMAKE_BUILD_TYPE=Release'
+        '-DTD_ENABLE_JNI=ON'
         '..'
     )
     $cmakeBuildArguments = @(
