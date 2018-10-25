@@ -10,8 +10,8 @@ matrix:
 #        - pwsh ./install.$TRAVIS_OS_NAME.ps1
         
 script:
-  - ./build.$PLATFORM.sh
-  - ./pack.$PLATFORM.sh
+  - bash ./build.$PLATFORM.sh
+  - bash ./pack.$PLATFORM.sh
 
 deploy:
   provider: releases
