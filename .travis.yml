@@ -3,11 +3,11 @@ language: cpp
 matrix:
   include:
     - os: osx
-      env: PLATFORM="osx"
+      env: $PLATFORM="osx"
     - os: windows
-      env: PLATFORM="windows"
+      env: $PLATFORM="windows"
     - os: linux
-      env: PLATFORM="linux"
+      env: $PLATFORM="linux"
 
 before_install:
         - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
