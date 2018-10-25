@@ -1,3 +1,3 @@
 $ErrorActionPreference = 'Stop'
 
-Compress-Archive ./td/build/libtdjson.so tdlib.linux.zip
+Compress-Archive ./td/build/*.so tdlib.linux.zip

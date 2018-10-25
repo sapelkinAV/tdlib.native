@@ -1,3 +1,3 @@
 $ErrorActionPreference = 'Stop'
 
-Compress-Archive ./td/build/libtdjson.dylib tdlib.osx.zip
+Compress-Archive ./td/build/*.dylib tdlib.osx.zip
