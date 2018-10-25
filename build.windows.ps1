@@ -33,10 +33,10 @@ try {
         $cmakeArguments += @('-A', 'X64')
     }
 
-    vcpkg $vcpkgArguments
-    if (!$?) {
-        throw 'Cannot execute vcpkg'
-    }
+    # vcpkg $vcpkgArguments
+    # if (!$?) {
+    #     throw 'Cannot execute vcpkg'
+    # }
 
     cmake $cmakeArguments
     if (!$?) {
