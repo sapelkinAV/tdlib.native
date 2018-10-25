@@ -1,6 +1,6 @@
 param (
     $td = "$PSScriptRoot/td",
-    $Platform = 'x64-windows',
+    $platform = 'x64-windows',
     [Parameter(Mandatory = $true)] $VcpkgToolchain
 )
 
@@ -29,7 +29,7 @@ try {
         'Release'
     )
 
-    if ($Platform -eq 'x64-windows') {
+    if ($platform -eq 'x64-windows') {
         $cmakeArguments += @('-A', 'X64')
     }
 
