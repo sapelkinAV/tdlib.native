@@ -4,14 +4,18 @@ matrix:
   include:
     - os: osx
       env: $PLATFORM="osx"
-      
+    - os: windows
+      env: $PLATFORM="windows"
+    - os: linux
+      env: $PLATFORM="linux"
+
 before_install:
         - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
         - pwsh ./install.$PLATFORM.ps1
         
 script:
-  - bash ./build.$PLATFORM.sh
-  - bash ./pack.$PLATFORM.sh
+  - pwsh ./build.$PLATFORM.ps1
+  - pwsh ./pack.$PLATFORM.ps1
 
 deploy:
   provider: releases
