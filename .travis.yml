@@ -3,26 +3,24 @@ language: cpp
 matrix:
   include:
     - os: osx
-      env: $PLATFORM="osx"
-    - os: osx
-      env: $PLATFORM="windows"
+    - os: windows
     - os: linux
-      env: $PLATFORM="linux"
+
 
 before_install:
         - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
-        - pwsh ./install.$PLATFORM.ps1
+        - pwsh ./install.$TRAVIS_OS_NAME.ps1
         
 script:
-  - pwsh ./build.$PLATFORM.ps1
-  - pwsh ./pack.$PLATFORM.ps1
+  - pwsh ./build.$TRAVIS_OS_NAME.ps1
+  - pwsh ./pack.$TRAVIS_OS_NAME.ps1
 
 deploy:
   provider: releases
   api_key: 
     - secure: $TRAVIS_GITHUB_TOKEN
   file:
-    - tdlib.$PLATFORM.zip
+    - tdlib.$TRAVIS_OS_NAME.zip
   skip_cleanup: true
   on:
     tags: true
