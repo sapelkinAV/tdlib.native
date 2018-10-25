@@ -4,14 +4,17 @@ matrix:
   include:
     - os: osx
       env: $PLATFORM="osx"
-    - os: osx
+      before_install:
+        - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
+        - pwsh ./install.$TRAVIS_OS_NAME.ps1
+    - os: windows
       env: $PLATFORM="windows"
-    - os: osx
+    - os: linux
       env: $PLATFORM="linux"
+      before_install:
+        - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
+        - pwsh ./install.$TRAVIS_OS_NAME.ps1
 
-before_install:
-  - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
-  - pwsh ./install.$TRAVIS_OS_NAME.ps1
 
 script:
   - pwsh ./build.$PLATFORM.ps1
