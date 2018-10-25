@@ -5,13 +5,13 @@ matrix:
     - os: osx
       env: $PLATFORM="osx"
       
-before_install:
-        - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
-        - pwsh ./install.$TRAVIS_OS_NAME.ps1
+#before_install:
+#        - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
+#        - pwsh ./install.$TRAVIS_OS_NAME.ps1
         
 script:
-  - pwsh ./build.$PLATFORM.ps1
-  - pwsh ./pack.$PLATFORM.ps1
+  - ./build.$PLATFORM.sh
+  - ./pack.$PLATFORM.sh
 
 deploy:
   provider: releases
