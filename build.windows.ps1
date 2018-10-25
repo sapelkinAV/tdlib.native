@@ -1,6 +1,6 @@
 param (
     $td = "$PSScriptRoot/td",
-    $platform = 'x64-windows',
+    $Platform = 'x64-windows',
     [Parameter(Mandatory = $true)] $VcpkgToolchain
 )
 
@@ -19,7 +19,6 @@ try {
     )
     $cmakeArguments = @(
         "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchain"
-        '-DTD_ENABLE_JNI=ON'
         '..'
     )
     $cmakeBuildArguments = @(
@@ -29,14 +28,14 @@ try {
         'Release'
     )
 
-    if ($platform -eq 'x64-windows') {
+    if ($Platform -eq 'x64-windows') {
         $cmakeArguments += @('-A', 'X64')
     }
 
-    # vcpkg $vcpkgArguments
-    # if (!$?) {
-    #     throw 'Cannot execute vcpkg'
-    # }
+    vcpkg $vcpkgArguments
+    if (!$?) {
+        throw 'Cannot execute vcpkg'
+    }
 
     cmake $cmakeArguments
     if (!$?) {
