@@ -40,6 +40,7 @@ artifacts:
 
 deploy:
   provider: GitHub
+  tag: $(APPVEYOR_REPO_TAG_NAME)
   auth_token: $TRAVIS_GITHUB_TOKEN
   artifact: tdlib.windows,tdlib.linux
   on:
