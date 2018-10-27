@@ -45,3 +45,4 @@ deploy:
   artifact: tdlib.windows,tdlib.linux
   on:
     APPVEYOR_REPO_TAG: true
+  
