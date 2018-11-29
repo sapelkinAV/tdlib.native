@@ -49,3 +49,19 @@ try {
 } finally {
     Pop-Location
 }
+
+Push-Location $td/example/java
+try {
+
+    md build
+} finally {
+    Pop-Location
+}
+
+Push-Location $td/example/java/build
+try {
+    cmake -DCMAKE_BUILD_TYPE=Release -DTd_DIR=$td/example/java/td/lib/cmake/Td -DCMAKE_INSTALL_PREFIX:PATH=.. ..
+    cmake --build . --target install
+} finally {
+    Pop-Location
+}

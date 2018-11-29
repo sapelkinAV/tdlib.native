@@ -1,3 +1,3 @@
 $ErrorActionPreference = 'Stop'
 
-Compress-Archive .\td\build\Release\*.dll tdlib.windows.zip
+Compress-Archive .\td\example\java\bin\* tdlib.windows.zip
