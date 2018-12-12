@@ -6,6 +6,8 @@ $ErrorActionPreference = 'Stop'
 
 if (-not (Test-Path $td/build)) {
     New-Item -Type Directory $td/build
+    New-Item -Type Directory $td/example/java/build
+
 }
 
 Push-Location $td/build
@@ -14,6 +16,7 @@ try {
         '-DCMAKE_BUILD_TYPE=Release'
         '-DOPENSSL_ROOT_DIR=/usr/local/opt/openssl/'
         '-DTD_ENABLE_JNI=ON'
+        '-DCMAKE_INSTALL_PREFIX:PATH=../example/java/td'
         '..'
     )
     $cmakeBuildArguments = @(
@@ -35,18 +38,27 @@ try {
 }
 
 
-Push-Location $td/example/java
-try {
-
-    md build
-} finally {
-    Pop-Location
-}
-
 Push-Location $td/example/java/build
 try {
-    cmake -DCMAKE_BUILD_TYPE=Release -DTd_DIR=$td/example/java/td/lib/cmake/Td -DCMAKE_INSTALL_PREFIX:PATH=.. ..
-    cmake --build . --target install
+    $cmakeArguments = @(
+        '-DCMAKE_BUILD_TYPE=Release'
+        '-DTd_DIR=../td/lib/cmake/Td'
+        '-DCMAKE_INSTALL_PREFIX:PATH=..'
+        '..'
+    )
+    $cmakeBuildArguments = @(
+    '--build'
+    '.'
+    )
+    cmake $cmakeArguments
+    if (!$?) {
+        throw 'Cannot execute cmake'
+    }
+
+    cmake $cmakeBuildArguments
+    if (!$?) {
+        throw 'Cannot execute cmake --build'
+    }
 } finally {
     Pop-Location
 }
