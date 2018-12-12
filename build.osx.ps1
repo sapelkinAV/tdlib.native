@@ -4,13 +4,14 @@ param (
 
 $ErrorActionPreference = 'Stop'
 
-if (-not (Test-Path $td/build)) {
-    New-Item -Type Directory $td/build
-    New-Item -Type Directory $td/example/java/build
-
+if (-not (Test-Path $PSScriptRoot/build)) {
+    New-Item -Type Directory $PSScriptRoot/build
+}
+if (-not (Test-Path $PSScriptRoot/example/java/build)) {
+    New-Item -Type Directory $PSScriptRoot/example/java/build
 }
 
-Push-Location $td/build
+Push-Location $PSScriptRoot/build
 try {
     $cmakeArguments = @(
         '-DCMAKE_BUILD_TYPE=Release'
@@ -38,7 +39,7 @@ try {
 }
 
 
-Push-Location $td/example/java/build
+Push-Location $PSScriptRoot/example/java/build
 try {
     $cmakeArguments = @(
         '-DCMAKE_BUILD_TYPE=Release'
