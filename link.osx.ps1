@@ -1,9 +1,14 @@
 
+param (
+    $td = "$PSScriptRoot/td"
+)
 
 
 
 Push-Location $td/example/java/build
 try {
+    dir
+
     $cmakeArguments = @(
     '-DCMAKE_BUILD_TYPE=Release'
     '-DTd_DIR=../td/lib/cmake/Td'
@@ -27,5 +32,3 @@ try {
     Pop-Location
 }
 
-
-New-Item -Type Directory $td/example/java/build

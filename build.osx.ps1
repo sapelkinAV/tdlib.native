@@ -4,15 +4,17 @@ param (
 
 $ErrorActionPreference = 'Stop'
 
-if (-not (Test-Path $PSScriptRoot/build)) {
-    New-Item -Type Directory $PSScriptRoot/build
+if (-not (Test-Path $td/build)) {
+    New-Item -Type Directory $td/build
 }
-if (-not (Test-Path $PSScriptRoot/example/java/build)) {
-    New-Item -Type Directory $PSScriptRoot/example/java/build
+if (-not (Test-Path $td/example/java/build)) {
+    New-Item -Type Directory $td/example/java/build
 }
 
-Push-Location $PSScriptRoot/build
+
+Push-Location $td/build
 try {
+
     $cmakeArguments = @(
         '-DCMAKE_BUILD_TYPE=Release'
         '-DOPENSSL_ROOT_DIR=/usr/local/opt/openssl/'
@@ -39,27 +41,3 @@ try {
 }
 
 
-Push-Location $PSScriptRoot/example/java/build
-try {
-    $cmakeArguments = @(
-        '-DCMAKE_BUILD_TYPE=Release'
-        '-DTd_DIR=../td/lib/cmake/Td'
-        '-DCMAKE_INSTALL_PREFIX:PATH=..'
-        '..'
-    )
-    $cmakeBuildArguments = @(
-    '--build'
-    '.'
-    )
-    cmake $cmakeArguments
-    if (!$?) {
-        throw 'Cannot execute cmake'
-    }
-
-    cmake $cmakeBuildArguments
-    if (!$?) {
-        throw 'Cannot execute cmake --build'
-    }
-} finally {
-    Pop-Location
-}

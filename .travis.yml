@@ -11,6 +11,7 @@ before_install:
         
 script:
   - pwsh ./build.$TRAVIS_OS_NAME.ps1
+  - pwsh ./link.$TRAVIS_OS_NAME.ps1
   - pwsh ./pack.$TRAVIS_OS_NAME.ps1
 
 deploy:
