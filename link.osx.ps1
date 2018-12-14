@@ -11,7 +11,7 @@ try {
 
     $cmakeArguments = @(
     '-DCMAKE_BUILD_TYPE=Release'
-    '-DTd_DIR=../td/lib/cmake/Td'
+    '-DTd_DIR=././td/lib/cmake/Td'
     '-DCMAKE_INSTALL_PREFIX:PATH=..'
     '..'
     )
