@@ -32,7 +32,7 @@ try {
         '.'
     )
 
-    cmake $cmakeArguments -DCMAKE_INSTALL_PREFIX:PATH=$java_path/td
+    cmake -DCMAKE_BUILD_TYPE=Release -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl/ -DTD_ENABLE_JNI=ON -DCMAKE_INSTALL_PREFIX:PATH=../example/java/td ..
     if (!$?) {
         throw 'Cannot execute cmake'
     }
