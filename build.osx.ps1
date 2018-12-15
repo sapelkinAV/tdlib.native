@@ -2,8 +2,8 @@ param (
     $td = "$PSScriptRoot/td"
 )
 
-$build_path = $td/build
-$java_path = $td/example/java
+$build_path = "$td/build"
+$java_path = "$td/example/java"
 
 $ErrorActionPreference = 'Stop'
 
