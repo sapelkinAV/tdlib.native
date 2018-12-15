@@ -5,6 +5,9 @@ param (
 $build_path = "$td/build"
 $java_path = "$td/example/java"
 
+echo "build_path : $build_path"
+echo "java_path  : $java_path"
+
 $ErrorActionPreference = 'Stop'
 
 if (-not (Test-Path $td/build)) {
