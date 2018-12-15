@@ -4,6 +4,7 @@ param (
     [Parameter(Mandatory = $true)] $VcpkgToolchain
 )
 
+
 $ErrorActionPreference = 'Stop'
 
 if (-not (Test-Path $td/build)) {

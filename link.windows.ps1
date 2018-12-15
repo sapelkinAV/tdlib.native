@@ -4,8 +4,8 @@ param (
 )
 
 
-$java_path = "$td/example/java"
-$java_compile_destination = "$java_path/bin"
+$java_path = $td/example/java
+$java_compile_destination = $java_path/bin
 Push-Location $td/example/java/build
 try {
 
