@@ -3,8 +3,8 @@ param (
 )
 
 
-mkdir -p ./build
-mkdir -p ./example/java/build
+New-Item -Type Directory $td/build
+New-Item -Type Directory $td/example/java/build
 
 
 cd ./build
