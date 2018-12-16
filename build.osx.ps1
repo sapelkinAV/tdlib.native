@@ -13,7 +13,5 @@ cmake --build . --target install
 
 
 cd ../example/java/build
-pwd
-ls -al ../td/lib/cmake/Td/
 cmake -DCMAKE_BUILD_TYPE=Release -DTd_DIR=././td/lib/cmake/Td/ -DCMAKE_INSTALL_PREFIX:PATH=.. ..
 cmake --build . --target install
