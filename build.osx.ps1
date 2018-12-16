@@ -4,6 +4,7 @@ param (
 
 $build_path = "$td/build"
 $java_path = "$td/example/java"
+$java_compile_destination = "$java_path/bin"
 
 echo "build_path : $build_path"
 echo "java_path  : $java_path"
@@ -49,8 +50,7 @@ try {
     Pop-Location
 }
 
-$java_path = "$td/example/java"
-$java_compile_destination = "$java_path/bin"
+
 
 
 echo "java_path  : $java_path"
