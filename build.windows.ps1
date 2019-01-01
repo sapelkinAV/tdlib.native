@@ -36,6 +36,8 @@ try {
         '.'
         '--config'
         'Release'
+    '--target'
+    'install'
     )
 
     if ($Platform -eq 'x64-windows') {
@@ -72,7 +74,8 @@ try {
     $cmakeBuildArguments = @(
     '--build'
     '.'
-    '--target install'
+    '--target'
+    'install'
     )
     cmake $cmakeArguments
     if (!$?) {
