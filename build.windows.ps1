@@ -27,17 +27,18 @@ try {
     )
     $cmakeArguments = @(
         "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchain"
-        "-DTd_DIR=$java_path/td/lib/cmake/Td"
-        "-DCMAKE_INSTALL_PREFIX:PATH=.."
+        '-DTD_ENABLE_JNI=ON'
+        "-DCMAKE_INSTALL_PREFIX:PATH=../example/java/td"
         '..'
     )
     $cmakeBuildArguments = @(
         '--build'
         '.'
+        '--target'
+        'install'
         '--config'
         'Release'
-    '--target'
-    'install'
+
     )
 
     if ($Platform -eq 'x64-windows') {

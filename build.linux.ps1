@@ -7,7 +7,6 @@ $ErrorActionPreference = 'Stop'
 
 $build_path = "$td/build"
 $java_path = "$td/example/java"
-$java_compile_destination = "$java_path/bin"
 
 if (-not (Test-Path $td/build)) {
     New-Item -Type Directory $td/build
@@ -17,7 +16,7 @@ if (-not (Test-Path $td/example/java/build)) {
 }
 
 
-Push-Location $td/build
+Push-Location $build_path
 try {
     $cmakeArguments = @(
         '-DCMAKE_BUILD_TYPE=Release'
@@ -28,8 +27,8 @@ try {
     $cmakeBuildArguments = @(
         '--build'
         '.'
-    '--target'
-    'install'
+        '--target'
+        'install'
     )
 
     cmake $cmakeArguments
