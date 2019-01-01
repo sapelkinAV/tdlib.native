@@ -28,7 +28,7 @@ try {
     $cmakeBuildArguments = @(
         '--build'
         '.'
-        '--target install'
+        ' --target install'
     )
 
     cmake $cmakeArguments
@@ -56,7 +56,7 @@ try {
     $cmakeBuildArguments = @(
     '--build'
     '.'
-    '--target install'
+    ' --target install'
     )
     cmake $cmakeArguments
     if (!$?) {

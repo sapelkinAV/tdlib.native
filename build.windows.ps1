@@ -36,7 +36,6 @@ try {
         '.'
         '--config'
         'Release'
-        '--target install'
     )
 
     if ($Platform -eq 'x64-windows') {
