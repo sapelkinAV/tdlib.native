@@ -7,7 +7,6 @@ param (
 
 $build_path = "$td/build"
 $java_path = "$td/example/java"
-$java_compile_destination = "$java_path/bin"
 
 $ErrorActionPreference = 'Stop'
 
@@ -18,7 +17,7 @@ if (-not (Test-Path $td/example/java/build)) {
     New-Item -Type Directory $td/example/java/build
 }
 
-Push-Location $td/build
+Push-Location $build_path
 try {
     $vcpkgArguments = @(
         'install'
@@ -66,18 +65,34 @@ try {
 Push-Location $td/example/java/build
 try {
 
+    $vcpkgArguments = @(
+    'install'
+    "openssl:$platform"
+    "zlib:$platform"
+    )
+
     $cmakeArguments = @(
+    "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchain"
     '-DCMAKE_BUILD_TYPE=Release'
     "-DTd_DIR=$java_path/td/lib/cmake/Td"
     "-DCMAKE_INSTALL_PREFIX:PATH=.."
     '..'
     )
+
     $cmakeBuildArguments = @(
     '--build'
     '.'
     '--target'
     'install'
+    '--config'
+    'Release'
     )
+
+    vcpkg $vcpkgArguments
+    if (!$?) {
+        throw 'Cannot execute vcpkg'
+    }
+
     cmake $cmakeArguments
     if (!$?) {
         throw 'Cannot execute cmake'
