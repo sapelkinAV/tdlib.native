@@ -6,8 +6,6 @@ $build_path = "$td/build"
 $java_path = "$td/example/java"
 $java_compile_destination = "$java_path/bin"
 
-New-Item -Type Directory $td/build
-New-Item -Type Directory $td/example/java/build
 
 
 $ErrorActionPreference = 'Stop'
@@ -33,6 +31,7 @@ try {
     $cmakeBuildArguments = @(
         '--build'
         '.'
+        '--target install'
     )
 
     cmake $cmakeArguments
@@ -50,4 +49,31 @@ try {
 
 
 
+
+Push-Location $td/example/java/build
+try {
+
+    $cmakeArguments = @(
+    '-DCMAKE_BUILD_TYPE=Release'
+    "-DTd_DIR=$java_path/td/lib/cmake/Td"
+    "-DCMAKE_INSTALL_PREFIX:PATH=.."
+    '..'
+    )
+    $cmakeBuildArguments = @(
+    '--build'
+    '.'
+    '--target install'
+    )
+    cmake $cmakeArguments
+    if (!$?) {
+        throw 'Cannot execute cmake'
+    }
+
+    cmake $cmakeBuildArguments
+    if (!$?) {
+        throw 'Cannot execute cmake --build'
+    }
+} finally {
+    Pop-Location
+}
 

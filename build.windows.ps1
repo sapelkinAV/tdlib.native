@@ -5,10 +5,16 @@ param (
 )
 
 
+$build_path = "$td/build"
+$java_path = "$td/example/java"
+$java_compile_destination = "$java_path/bin"
+
 $ErrorActionPreference = 'Stop'
 
 if (-not (Test-Path $td/build)) {
     New-Item -Type Directory $td/build
+}
+if (-not (Test-Path $td/example/java/build)) {
     New-Item -Type Directory $td/example/java/build
 }
 
@@ -21,6 +27,8 @@ try {
     )
     $cmakeArguments = @(
         "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchain"
+        "-DTd_DIR=$java_path/td/lib/cmake/Td"
+        "-DCMAKE_INSTALL_PREFIX:PATH=.."
         '..'
     )
     $cmakeBuildArguments = @(
@@ -28,6 +36,7 @@ try {
         '.'
         '--config'
         'Release'
+        '--target install'
     )
 
     if ($Platform -eq 'x64-windows') {
@@ -54,15 +63,17 @@ try {
 
 Push-Location $td/example/java/build
 try {
+
     $cmakeArguments = @(
     '-DCMAKE_BUILD_TYPE=Release'
-    '-DTd_DIR=../td/lib/cmake/Td'
-    '-DCMAKE_INSTALL_PREFIX:PATH=..'
+    "-DTd_DIR=$java_path/td/lib/cmake/Td"
+    "-DCMAKE_INSTALL_PREFIX:PATH=.."
     '..'
     )
     $cmakeBuildArguments = @(
     '--build'
     '.'
+    '--target install'
     )
     cmake $cmakeArguments
     if (!$?) {
@@ -76,3 +87,4 @@ try {
 } finally {
     Pop-Location
 }
+

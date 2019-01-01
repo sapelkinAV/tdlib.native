@@ -19,11 +19,9 @@ build_script:
   - pwsh: |
       if ($isLinux) {
         ./build.linux.ps1
-        ./link.linux.ps1
       } else {
         c:\tools\vcpkg\vcpkg.exe install openssl:x64-windows openssl:x86-windows zlib:x64-windows zlib:x86-windows
         .\build.windows.ps1 -VcpkgToolchain c:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake
-        .\link.windows.ps1
       }
 
 after_build:
