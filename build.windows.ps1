@@ -65,34 +65,18 @@ try {
 Push-Location $td/example/java/build
 try {
 
-    $vcpkgArguments = @(
-    'install'
-    "openssl:$platform"
-    "zlib:$platform"
-    )
-
     $cmakeArguments = @(
-    "-DCMAKE_TOOLCHAIN_FILE=$VcpkgToolchain"
     '-DCMAKE_BUILD_TYPE=Release'
     "-DTd_DIR=$java_path/td/lib/cmake/Td"
     "-DCMAKE_INSTALL_PREFIX:PATH=.."
     '..'
     )
-
     $cmakeBuildArguments = @(
     '--build'
     '.'
     '--target'
     'install'
-    '--config'
-    'Release'
     )
-
-    vcpkg $vcpkgArguments
-    if (!$?) {
-        throw 'Cannot execute vcpkg'
-    }
-
     cmake $cmakeArguments
     if (!$?) {
         throw 'Cannot execute cmake'
