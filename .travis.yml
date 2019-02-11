@@ -12,8 +12,9 @@ before_install:
         - pwsh ./install.$TRAVIS_OS_NAME.ps1
         
 script:
-  - pwsh ./build.$TRAVIS_OS_NAME.ps1
-  - pwsh ./pack.$TRAVIS_OS_NAME.ps1
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pwsh ./build.$TRAVIS_OS_NAME.ps1; pwsh ./pack.$TRAVIS_OS_NAME.ps1; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pwsh ./build.$TRAVIS_OS_NAME.ps1; pwsh ./pack.$TRAVIS_OS_NAME.ps1; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell ./build.$TRAVIS_OS_NAME.ps1; powershell ./pack.$TRAVIS_OS_NAME.ps1; fi
 
 deploy:
   provider: releases
