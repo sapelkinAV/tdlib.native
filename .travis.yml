@@ -3,18 +3,15 @@ language: cpp
 matrix:
   include:
     - os: osx
-    - os: linux
-    - os: windows
 
 
 before_install:
         - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
-        - if [ "$TRAVIS_OS_NAME" == "osx" ] || [ "$TRAVIS_OS_NAME" == "linux" ] ; then  pwsh ./install.$TRAVIS_OS_NAME.ps1; fi
-        - if [ "$TRAVIS_OS_NAME" == "windows" ] ; then Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass;  powershell ./install.$TRAVIS_OS_NAME.ps1; fi
+        - pwsh ./install.$TRAVIS_OS_NAME.ps1
 
 script:
-  - if [ "$TRAVIS_OS_NAME" == "osx" ] || [ "$TRAVIS_OS_NAME" == "linux" ] ;  then pwsh ./build.$TRAVIS_OS_NAME.ps1; pwsh ./pack.$TRAVIS_OS_NAME.ps1; fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ] ; then Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; powershell ./build.$TRAVIS_OS_NAME.ps1; powershell ./pack.$TRAVIS_OS_NAME.ps1; fi
+  - pwsh ./build.$TRAVIS_OS_NAME.ps1
+  - pwsh ./pack.$TRAVIS_OS_NAME.ps1
 
 deploy:
   provider: releases
