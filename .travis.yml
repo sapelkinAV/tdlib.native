@@ -3,6 +3,8 @@ language: cpp
 matrix:
   include:
     - os: osx
+    - os: linux
+    - os: windows
 
 
 before_install:
