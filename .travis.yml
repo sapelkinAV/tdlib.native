@@ -9,11 +9,11 @@ matrix:
 
 before_install:
         - bash <(wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh)
-        - pwsh ./install.$TRAVIS_OS_NAME.ps1
-        
+        - if [[ "$TRAVIS_OS_NAME" == "osx" ] || [ "$TRAVIS_OS_NAME" == "linux" ]]; then  pwsh ./install.$TRAVIS_OS_NAME.ps1; fi
+        - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then  powershell ./install.$TRAVIS_OS_NAME.ps1; fi
+
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pwsh ./build.$TRAVIS_OS_NAME.ps1; pwsh ./pack.$TRAVIS_OS_NAME.ps1; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then pwsh ./build.$TRAVIS_OS_NAME.ps1; pwsh ./pack.$TRAVIS_OS_NAME.ps1; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] || [ "$TRAVIS_OS_NAME" == "linux" ]]; then pwsh ./build.$TRAVIS_OS_NAME.ps1; pwsh ./pack.$TRAVIS_OS_NAME.ps1; fi
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then powershell ./build.$TRAVIS_OS_NAME.ps1; powershell ./pack.$TRAVIS_OS_NAME.ps1; fi
 
 deploy:
